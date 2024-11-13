@@ -54,6 +54,13 @@ const LoginModal: React.FC<ModalProps> = ({ show, handleClose }): JSX.Element =>
 
       if (response.ok) {
         alert("로그인에 성공했습니다!");
+
+        const data = await response.json();
+        const token = data.access_token;
+
+        // JWT 토큰을 로컬 스토리지에 저장
+        localStorage.setItem("token", token);
+
         handleClose();
         setUsername("");
         setPassword("");
